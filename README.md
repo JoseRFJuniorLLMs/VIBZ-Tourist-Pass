@@ -1,74 +1,92 @@
 # VIBZ Tourist Pass
 
-Protótipo web responsivo para apresentação do **VIBZ Tourist Pass**, um programa promocional pensado para conectar hotéis, pousadas, hostels, restaurantes, beach clubs e turistas à vida noturna de Búzios.
+Protótipo web responsivo para apresentação do **VIBZ Tourist Pass**, programa promocional pensado para conectar hotéis, pousadas, restaurantes, beach clubs e turistas à vida noturna de Búzios.
 
-## Proposta
+## Conceito
 
-O turista recebe um cartão/passe com QR Code individual em um parceiro de hospedagem ou turismo. Ao chegar ao VIBZ, o QR é validado, a entrada promocional é registrada e o cliente recebe uma pulseira vinculada para consumo.
+O turista recebe um passe com QR Code individual em um parceiro. Ao chegar ao VIBZ, o QR é validado, a entrada promocional é registrada e o cliente recebe uma pulseira vinculada ao atendimento. O consumo é pago normalmente.
 
-O conceito segue o plano de negócio do projeto:
+O site traduz o fluxo comercial definido no plano:
 
-- cartão físico premium com QR individual;
-- distribuição por parceiros locais;
-- entrada promocional no VIBZ;
-- consumo pago normalmente;
-- pulseira vinculada ao passe;
-- controle de fraude e reutilização;
-- dashboard com origem, conversão e ticket médio;
-- expansão futura para um passaporte turístico de Búzios.
+**cartão físico premium → QR individual → entrada promocional → pulseira vinculada → consumo pago → dashboard por origem**
 
-## Site
+## O que está implementado
 
-O projeto foi construído em HTML, CSS e JavaScript puros, sem framework e sem etapa de build.
+- Landing page responsiva em HTML, CSS e JavaScript puros.
+- Identidade visual preto, laranja e magenta inspirada no conceito aprovado.
+- Mockups do cartão, smartphone, QR e pulseira.
+- Fluxo visual de 4 etapas.
+- Lista filtrável de estabelecimentos reais pesquisados em Búzios para simulação comercial.
+- Aviso explícito de que a listagem não representa parceria confirmada.
+- Dashboard demonstrativo com distribuição, entradas, pulseiras, ticket médio, conversão e ranking.
+- Simulação de leitura do QR Code, validação, liberação de entrada e associação de pulseira.
+- Formulário demonstrativo de interesse de parceiros.
+- Firebase Analytics configurado no projeto `vibz-tourist`.
+- Firebase Hosting configurado por `firebase.json` e `.firebaserc`.
 
-### Recursos da demonstração
+## Pesquisa local
 
-- layout responsivo inspirado na identidade visual preto + laranja + magenta;
-- hero com mockup do cartão, smartphone e pulseira;
-- fluxo visual de 4 etapas;
-- grade filtrável de parceiros potenciais em Búzios;
-- dashboard demonstrativo de cartões, entradas, pulseiras e ticket médio;
-- gráfico de entradas por dia e funil de conversão;
-- modal de leitura/validação do QR Code;
-- modal de cadastro de parceiro;
-- animações e contadores;
-- navegação mobile.
+A demonstração utiliza exemplos reais de hospedagem, gastronomia e beach clubs de Armação dos Búzios, incluindo opções de João Fernandes, Orla Bardot, Ferradura e Tucuns.
 
-## Parceiros exibidos
+> **Importante:** a presença de qualquer estabelecimento no protótipo não significa parceria, autorização de marca ou vínculo comercial. Os nomes são usados somente para demonstrar a proposta de prospecção.
 
-Os nomes de hotéis, restaurantes e beach clubs usados no protótipo foram pesquisados como estabelecimentos reais de Búzios para dar realismo à apresentação. **A presença de qualquer empresa no site não representa parceria comercial confirmada, autorização de marca ou vínculo com o VIBZ Tourist Pass.**
+## Firebase
+
+A configuração Web do Firebase está integrada em `script.js` para Analytics.
+
+Nesta versão, o formulário não grava dados pessoais no Firestore. O lead fica apenas no `localStorage` do navegador e o Analytics registra o evento de conversão. Isso evita publicar um formulário com regras de banco improvisadas, tradição humana que raramente termina de forma elegante.
+
+Para produção, conecte o formulário a uma API/CRM ou a uma coleção Firestore protegida por regras de segurança e validação server-side.
 
 ## Executar localmente
 
-Basta abrir `index.html` no navegador. Para servir por HTTP:
+Como `script.js` usa ES Modules:
 
 ```bash
 python -m http.server 8080
 ```
 
-Depois acesse `http://localhost:8080`.
+Abra:
+
+```text
+http://localhost:8080
+```
+
+## Deploy no Firebase Hosting
+
+Com o Firebase CLI autenticado:
+
+```bash
+firebase use vibz-tourist
+firebase deploy --only hosting
+```
 
 ## Estrutura
 
 ```text
 VIBZ-Tourist-Pass/
+├── assets/
+│   ├── qr-demo.svg
+│   └── vibz-logo.svg
+├── .firebaserc
+├── firebase.json
 ├── index.html
 ├── styles.css
 ├── script.js
 └── README.md
 ```
 
-## Próximos passos para produção
+## Próximos passos de produção
 
 1. Backend para emissão e validação de QR Codes únicos.
 2. Cadastro de parceiros e lotes de cartões por origem.
-3. Associação QR → pulseira → consumo.
+3. Associação real QR → pulseira → consumo.
 4. Autenticação do operador da entrada.
-5. Banco de dados e trilha de auditoria.
+5. Persistência segura, regras de acesso e trilha de auditoria.
 6. Dashboard real por parceiro, horário, conversão e receita.
-7. Consentimento separado para qualquer dado pessoal ou comunicação de marketing.
-8. Domínio, hospedagem, analytics e política de privacidade.
+7. Consentimento separado para qualquer dado pessoal ou marketing.
+8. Domínio oficial, política de privacidade e regulamento da promoção.
 
 ---
 
-**Status:** protótipo comercial / demonstração.
+**Status:** protótipo comercial funcional, pronto para deploy no Firebase Hosting.
